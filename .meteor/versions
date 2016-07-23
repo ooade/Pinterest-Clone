@@ -1,5 +1,7 @@
 accounts-base@1.2.8
+accounts-oauth@1.1.13
 accounts-password@1.1.13
+accounts-twitter@1.0.10
 accounts-ui@1.1.9
 accounts-ui-unstyled@1.1.12
 allow-deny@1.0.5
@@ -54,11 +56,14 @@ mongo@1.1.9_1
 mongo-id@1.0.5
 npm-bcrypt@0.8.6_3
 npm-mongo@1.4.45
+oauth@1.1.11
+oauth1@1.1.10
 observe-sequence@1.0.12
 ordered-dict@1.0.8
 promise@0.7.3
 random@1.0.10
 rate-limit@1.0.5
+react-meteor-data@0.2.9
 reactive-dict@1.1.8
 reactive-var@1.0.10
 reload@1.1.10
@@ -74,8 +79,10 @@ standard-minifier-css@1.0.8
 standard-minifier-js@1.0.8
 templating@1.1.14
 templating-tools@1.0.4
+tmeasday:check-npm-versions@0.2.0
 tracker@1.0.15
 twbs:bootstrap@3.3.6
+twitter@1.1.11
 ui@1.0.11
 underscore@1.0.9
 url@1.0.10
