@@ -10,7 +10,7 @@ class Header extends Component {
         return (
           <ul className="nav navbar-nav navbar-right">
             <li className="nav-item">
-              <Link to="/myPins">
+              <Link to="/my-pins">
                 My Pins
               </Link>
             </li>
@@ -25,7 +25,7 @@ class Header extends Component {
     }
 
     return (
-      <nav className="navbar navbar-fixed-top navbar-default">
+      <nav className="navbar navbar-static-top navbar-default">
         <div className="container">
           <div className="navbar-header">
             <Link to="/" className="navbar-brand"> p1nit </Link>

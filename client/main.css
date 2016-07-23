@@ -2,3 +2,21 @@
   margin: 18px;
   font-size: 14px;
 }
+
+.add {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 30px;
+}
+
+.list-group {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.list-group-item {
+  margin: 2px;
+  justify-content: space-around;
+}
