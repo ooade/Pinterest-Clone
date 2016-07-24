@@ -4,6 +4,7 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import Header from './components/header';
 import Add from './components/add';
 import MyPins from './components/my-pins';
+import All from './components/all';
 
 const App = props => {
   return (
@@ -19,6 +20,7 @@ const App = props => {
 const routes = (
   <Router history={hashHistory}>
     <Route component={App} path="/">
+      <IndexRoute component={All} />
       <Route component={MyPins} path="/my-pins" />
       <Route component={Add} path="/add" />
     </Route>

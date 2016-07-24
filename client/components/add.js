@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { hashHistory } from 'react-router';
 
 class Add extends Component {
+  componentWillMount() {
+    if (!Meteor.userId()) {
+      hashHistory.push('/');
+    }
+  }
+
   onFormSubmit(e) {
     e.preventDefault();
 

@@ -5,11 +5,23 @@ Meteor.methods({
     return Pins.insert({
       createdAt: new Date(),
       description: data.desc,
-      likes: 0,
+      likedBy: [],
       ownerId: this.userId,
       title: data.title,
       url: data.url
     });
+  },
+
+  'pin.remove': (pin) => {
+    return Pins.remove(pin);
+  },
+
+  'pin.like': function(pin) {
+    return Pins.update(pin, {$push: { likedBy: this.userId }});
+  },
+
+  'pin.unlike': function(pin) {
+    return Pins.update(pin, {$pop: { likedBy: this.userId }});
   }
 });
 

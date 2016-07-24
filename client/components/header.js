@@ -28,7 +28,7 @@ class Header extends Component {
       <nav className="navbar navbar-static-top navbar-default">
         <div className="container">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand"> p1nit </Link>
+            <Link to="/" className="navbar-brand"> Pinit </Link>
           </div>
           <ul className="nav navbar-nav">
             <li>
