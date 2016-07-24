@@ -8,18 +8,39 @@ class All extends Component {
     e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
   }
 
+  onLike(pin, event) {
+    event.preventDefault();
+
+    Meteor.call('pin.like', pin);
+  }
+
+  onRemoveLike(pin, event) {
+    event.preventDefault();
+
+    Meteor.call('pin.unlike', pin);
+  }
+
+  onRetweet(pin, event) {
+    event.preventDefault();
+
+    Meteor.call('pin.retweet', pin);
+  }
+
   renderPins() {
     return this.props.pins.map(pin => {
       return (
-        <li className="grid-item" key={pin._id}>
-          <h3 style={{textAlign: "center"}}>{pin.title}</h3>
-          <img src={pin.url} onError={this.imageBroken.bind(this)} />
-          <h5 className="text-muted">{pin.description}</h5>
-          <div className="action-bar">
-            {/*<i className="fa fa-heart" />*/}
-            {/*<i className="fa fa-retweet" style={{float:"right"}}/>*/}
+        <div className="grid-item" key={pin._id}>
+          <img src={pin.url} className="img-responsive" onError={this.imageBroken.bind(this)} style={{width: "100%"}}/>
+          <div className="padded">
+            <h4>{pin.title}</h4>
+            <h5 className="text-muted" style={{fontSize: 12}}>{pin.description}</h5>
+            <div className="action-bar">
+              { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
+              { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
+              { pin.ownerId !== this.props.userId ? <i className="fa fa-retweet" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : null }
+            </div>
           </div>
-        </li>
+        </div>
       )
     });
   }
@@ -29,10 +50,10 @@ class All extends Component {
       return <div class="alert alert-info">Oops! No Pins </div>
     }
     return (
-      <div className="my-pins">
-        <ul className="grid">
+      <div className="all-pins">
+        <div className="grid">
           { this.renderPins() }
-        </ul>
+        </div>
       </div>
     );
   }
@@ -41,5 +62,5 @@ class All extends Component {
 export default createContainer( () => {
   Meteor.subscribe('pins');
 
-  return { pins: Pins.find().fetch() };
+  return { pins: Pins.find().fetch(), userId: Meteor.userId() };
 }, All);

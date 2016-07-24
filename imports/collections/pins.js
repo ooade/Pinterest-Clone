@@ -1,14 +1,14 @@
 import { Mongo } from 'meteor/mongo';
 
 Meteor.methods({
-  'pins.insert': function(data) {
+  'pins.insert': function(pin) {
     return Pins.insert({
       createdAt: new Date(),
-      description: data.desc,
+      description: pin.desc,
       likedBy: [],
       ownerId: this.userId,
-      title: data.title,
-      url: data.url
+      title: pin.title,
+      url: pin.url
     });
   },
 
@@ -22,6 +22,17 @@ Meteor.methods({
 
   'pin.unlike': function(pin) {
     return Pins.update(pin, {$pop: { likedBy: this.userId }});
+  },
+
+  'pin.retweet': function(pin) {
+    return Pins.insert({
+      createdAt: new Date(),
+      description: pin.desc,
+      likedBy: [],
+      ownerId: this.userId,
+      title: pin.title,
+      url: pin.url
+    });
   }
 });
 

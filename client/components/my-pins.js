@@ -35,10 +35,10 @@ class MyPins extends Component {
             <h4>{pin.title}</h4>
             <h5 className="text-muted" style={{fontSize: 12}}>{pin.description}</h5>
             <div className="action-bar">
-              { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart red" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
-              {/*<i className="fa fa-retweet" style={{float:"right"}}/>*/}
+              { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
+              { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
+              <i className="fa fa-remove red" onClick={this.onDelete.bind(this, pin)} style={{float:"right"}}/>
             </div>
-            <button className="btn btn-sm btn-danger" onClick={this.onDelete.bind(this, pin)}>Delete</button>
           </div>
         </div>
       )

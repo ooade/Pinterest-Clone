@@ -9,14 +9,14 @@
   margin-top: 30px;
 }
 
-.my-pins {
+.my-pins, .all-pins {
   -moz-column-count: 4;
   -webkit-column-count: 4;
   column-count: 4;
 }
 
 @media (max-width: 800px) {
-  .my-pins {
+  .my-pins, .all-pins {
     -moz-column-count: 3;
     -webkit-column-count: 3;
     column-count: 3;
@@ -24,7 +24,7 @@
 }
 
 @media (max-width: 600px) {
-  .my-pins {
+  .my-pins, .all-pins {
     -moz-column-count: 2;
     -webkit-column-count: 2;
     column-count: 2;
@@ -32,7 +32,7 @@
 }
 
 @media (max-width: 400px) {
-  .my-pins {
+  .my-pins, .all-pins {
     -moz-column-count: 1;
     -webkit-column-count: 1;
     column-count: 1;
@@ -67,4 +67,12 @@
 
 .action-bar i{
   cursor: pointer;
+}
+
+.green, sup {
+  color: forestgreen;
+}
+
+.action-bar i:hover{
+  color: forestgreen;
 }
