@@ -49,7 +49,7 @@ class All extends Component {
             <div className="action-bar">
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
               { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
-              { pin.ownerId !== this.props.userId ? <i className="fa fa-retweet" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : null }
+              { pin.ownerId !== this.props.userId ? <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : null }
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@ class All extends Component {
 
   render() {
     if (!this.props.pins) {
-      return <div class="alert alert-info">Oops! No Pins </div>
+      return <div className="alert alert-info">Oops! No Pins </div>
     }
 
     return (

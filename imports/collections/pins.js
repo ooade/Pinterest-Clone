@@ -2,6 +2,7 @@ import { Mongo } from 'meteor/mongo';
 
 Meteor.methods({
   'pins.insert': function(pin) {
+    if (!this.userId) { return; }
     return Pins.insert({
       createdAt: new Date(),
       description: pin.desc,
@@ -17,6 +18,7 @@ Meteor.methods({
   },
 
   'pin.like': function(pin) {
+    if (!this.userId) { return; }
     return Pins.update(pin, {$push: { likedBy: this.userId }});
   },
 
@@ -25,6 +27,7 @@ Meteor.methods({
   },
 
   'pin.retweet': function(pin) {
+    if (!this.userId) { return; }
     return Pins.insert({
       createdAt: new Date(),
       description: pin.desc,
