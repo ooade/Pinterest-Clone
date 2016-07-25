@@ -27,15 +27,23 @@ class Header extends Component {
     return (
       <nav className="navbar navbar-static-top navbar-default">
         <div className="container">
-          <div className="navbar-header">
-            <Link to="/" className="navbar-brand"> Pinit </Link>
-          </div>
-          <ul className="nav navbar-nav">
-            <li>
-              <Accounts />
-            </li>
-          </ul>
-          { isAuth() }
+        <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#mynav">
+          <span className="sr-only">Toggle navigation</span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+          <span className="icon-bar"></span>
+        </button>
+        <div className="navbar-header">
+          <Link to="/" className="navbar-brand"> Pinit </Link>
+        </div>
+        <div className="collapse navbar-collapse" id="mynav">
+        <ul className="nav navbar-nav">
+          <li>
+            <Accounts />
+          </li>
+        </ul>
+        { isAuth() }
+        </div>
         </div>
       </nav>
     );

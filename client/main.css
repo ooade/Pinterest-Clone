@@ -3,6 +3,14 @@
   font-size: 14px;
 }
 
+#login-buttons a:not(.login-link-text) {
+  color: forestgreen !important;
+}
+
+#login-buttons .login-button {
+  background-color: forestgreen;
+}
+
 .add {
   max-width: 500px;
   margin: auto;
@@ -75,4 +83,25 @@
 
 .action-bar i:hover{
   color: forestgreen;
+}
+
+a {
+  text-decoration: none !important;
+  color: forestgreen;
+}
+
+.navbar-default {
+  background-color: forestgreen;
+}
+
+.navbar-collapse {
+  border: none;
+}
+
+.icon-bar {
+  background-color: #fff !important;
+}
+
+.navbar-brand, .navbar-brand:hover, .navbar-nav a {
+  color: #fff !important;
 }

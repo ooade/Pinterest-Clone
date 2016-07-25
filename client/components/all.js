@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { hashHistory } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Pins } from '../../imports/collections/pins';
 
@@ -27,13 +27,25 @@ class All extends Component {
   }
 
   renderPins() {
+    const user = (id) => {
+      return this.props.users.map(user => {
+        if (user._id === id) {
+          if (user.services.twitter) {
+            return user.services.twitter.screenName;
+          }
+          return user.emails[0].address.split('@')[0];
+        }
+      });
+    }
+
     return this.props.pins.map(pin => {
       return (
         <div className="grid-item" key={pin._id}>
           <img src={pin.url} className="img-responsive" onError={this.imageBroken.bind(this)} style={{width: "100%"}}/>
           <div className="padded">
             <h4>{pin.title}</h4>
-            <h5 className="text-muted" style={{fontSize: 12}}>{pin.description}</h5>
+            <h6>{pin.description}</h6>
+            <h6 className="text-muted"><Link to={`/user/${pin.ownerId}`}><i className="fa fa-user" /> {user(pin.ownerId)}</Link></h6>
             <div className="action-bar">
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
               { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
@@ -49,6 +61,7 @@ class All extends Component {
     if (!this.props.pins) {
       return <div class="alert alert-info">Oops! No Pins </div>
     }
+
     return (
       <div className="all-pins">
         <div className="grid">
@@ -61,6 +74,7 @@ class All extends Component {
 
 export default createContainer( () => {
   Meteor.subscribe('pins');
+  Meteor.subscribe('userList');
 
-  return { pins: Pins.find().fetch(), userId: Meteor.userId() };
+  return { pins: Pins.find().fetch(), userId: Meteor.userId(), users: Meteor.users.find().fetch() };
 }, All);

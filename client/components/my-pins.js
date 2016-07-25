@@ -33,7 +33,7 @@ class MyPins extends Component {
           <img src={pin.url} className="img-responsive" onError={this.imageBroken.bind(this)} style={{width: "100%"}}/>
           <div className="padded">
             <h4>{pin.title}</h4>
-            <h5 className="text-muted" style={{fontSize: 12}}>{pin.description}</h5>
+            <h6 className="text-muted">{pin.description}</h6>
             <div className="action-bar">
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
               { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
@@ -61,6 +61,7 @@ class MyPins extends Component {
 
 export default createContainer( () => {
   Meteor.subscribe('my-pins');
+  Meteor.subscribe('userList');
 
   return { pins: Pins.find().fetch(), userId: Meteor.userId() };
 }, MyPins);

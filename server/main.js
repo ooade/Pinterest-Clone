@@ -9,4 +9,8 @@ Meteor.startup(() => {
   Meteor.publish('my-pins', function() {
     return Pins.find({ ownerId: this.userId });
   });
+
+  Meteor.publish('userList', function() {
+    return Meteor.users.find({}, {fields: {'services.password': 0 }});
+  });
 });
