@@ -30,7 +30,7 @@ Meteor.methods({
     if (!this.userId) { return; }
     return Pins.insert({
       createdAt: new Date(),
-      description: pin.desc,
+      description: pin.description,
       likedBy: [],
       ownerId: this.userId,
       title: pin.title,

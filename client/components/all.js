@@ -44,7 +44,7 @@ class All extends Component {
           <img src={pin.url} className="img-responsive" onError={this.imageBroken.bind(this)} style={{width: "100%"}}/>
           <div className="padded">
             <h4>{pin.title}</h4>
-            <h6>{pin.description}</h6>
+            <h6 className="text-muted">{pin.description}</h6>
             <h6 className="text-muted"><Link to={`/user/${pin.ownerId}`}><i className="fa fa-user" /> {user(pin.ownerId)}</Link></h6>
             <div className="action-bar">
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
@@ -58,8 +58,8 @@ class All extends Component {
   }
 
   render() {
-    if (!this.props.pins) {
-      return <div className="alert alert-info">Oops! No Pins </div>
+    if (this.props.pins.length == 0) {
+      return <div style={{textAlign: "center", marginTop: 50}}> <img src="../images/ring.gif" /> </div>
     }
 
     return (

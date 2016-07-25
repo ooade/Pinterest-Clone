@@ -49,6 +49,7 @@ class MyPins extends Component {
     if (!this.props.pins) {
       return <div className="alert alert-info">Oops! No Pins </div>
     }
+    
     if (!this.props.userId) {
       return <div className="alert alert-danger">Oops! You're not authenticated so you can't have a pin </div>
     }
