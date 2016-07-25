@@ -12,7 +12,17 @@ class All extends Component {
   onLike(pin, event) {
     event.preventDefault();
 
-    Meteor.call('pin.like', pin);
+    Meteor.call('pin.like', pin, err => {
+      if (err) {
+        Bert.alert({
+          title: 'Error, Couldn\'t perform this action',
+          message: 'Pls login to like a post',
+          type: 'danger',
+          style: 'growl-top-right',
+          icon: 'fa-gg-circle'
+        });
+      }
+    });
   }
 
   onRemoveLike(pin, event) {
@@ -24,7 +34,17 @@ class All extends Component {
   onRetweet(pin, event) {
     event.preventDefault();
 
-    Meteor.call('pin.retweet', pin);
+    Meteor.call('pin.retweet', pin, err => {
+      if (err) {
+        Bert.alert({
+          title: 'Error, Couldn\'t perform this action',
+          message: 'Pls login to repost',
+          type: 'danger',
+          style: 'growl-top-right',
+          icon: 'fa-gg-circle'
+        });
+      }
+    });
   }
 
   renderPins() {

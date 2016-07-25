@@ -18,7 +18,8 @@ Meteor.methods({
   },
 
   'pin.like': function(pin) {
-    if (!this.userId) { return; }
+    if (!this.userId) { throw new Meteor.Error("user unauthenticated"); }
+    
     return Pins.update(pin, {$push: { likedBy: this.userId }});
   },
 
@@ -27,7 +28,8 @@ Meteor.methods({
   },
 
   'pin.retweet': function(pin) {
-    if (!this.userId) { return; }
+    if (!this.userId) { throw new Meteor.Error("user unauthenticated"); }
+
     return Pins.insert({
       createdAt: new Date(),
       description: pin.description,
