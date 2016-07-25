@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, hashHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Pins } from '../../imports/collections/pins';
+import Moment from 'moment';
 
 class UserPin extends Component {
   imageBroken(e) {
@@ -39,12 +40,16 @@ class UserPin extends Component {
 
   renderPins() {
     return this.props.pins.map(pin => {
+      let moment = Moment(pin.createdAt, 'X');
+      let date = Moment(moment).fromNow();
+
       return (
         <div className="grid-item" key={pin._id}>
           <img src={pin.url} className="img-responsive" onError={this.imageBroken.bind(this)} style={{width: "100%"}}/>
           <div className="padded">
             <h4>{pin.title}</h4>
-            <h6>{pin.description}</h6>
+            <h6 className="text-muted">{pin.description}</h6>
+            <h6 className="text-muted">{date}</h6>
             <div className="action-bar">
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
               { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
