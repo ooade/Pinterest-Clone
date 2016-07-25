@@ -105,3 +105,10 @@ a {
 .navbar-brand, .navbar-brand:hover, .navbar-nav a {
   color: #fff !important;
 }
+
+.footer {
+  text-align: center;
+  border-top: 1px solid #eee;
+  margin-top: 10px;
+  padding-top: 20px;
+}
