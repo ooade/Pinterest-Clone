@@ -6,7 +6,7 @@ import Moment from 'moment';
 
 class All extends Component {
   imageBroken(e) {
-    // e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
+    e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
   }
 
   onLike(pin, event) {

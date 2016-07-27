@@ -11,8 +11,10 @@ const App = props => {
   return (
     <div>
       <Header />
-      <div className="container">
-        { props.children }
+      <div className="root">
+        <div className="container">
+          { props.children }
+        </div>
       </div>
     </div>
   );
@@ -32,4 +34,14 @@ const routes = (
 
 Meteor.startup(() => {
   ReactDOM.render(routes, document.querySelector('.app'));
+
+  $('.root').click(()=> {
+    Accounts._loginButtonsSession.set('dropdownVisible', false);
+  });
+
+  $(document).keyup(event => {
+    if (event.which === 27) {
+      Accounts._loginButtonsSession.set('dropdownVisible', false);
+    }
+  });
 });

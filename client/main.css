@@ -92,6 +92,7 @@ a {
 
 .navbar-default {
   background-color: forestgreen;
+  margin-bottom: 0px;
 }
 
 .navbar-collapse {
@@ -114,6 +115,10 @@ a {
 
 .navbar-brand, .navbar-brand:hover, .navbar-nav a {
   color: #fff !important;
+}
+
+.root > .container {
+  padding-top: 30px;
 }
 
 .footer {
