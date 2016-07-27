@@ -6,7 +6,7 @@ import Moment from 'moment';
 
 class All extends Component {
   imageBroken(e) {
-    e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
+    e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=40&txt=pinit&w=200&h=200';
   }
 
   onLike(pin, event) {
@@ -43,15 +43,15 @@ class All extends Component {
           style: 'growl-top-right',
           icon: 'fa-gg-circle'
         });
+      } else {
+        Bert.alert({
+          title: 'Retweet Successful',
+          message: `You retweeted post "${pin.title}"`,
+          type: 'success',
+          style: 'growl-top-right',
+          icon: 'fa-gg-circle'
+        });
       }
-
-      Bert.alert({
-        title: 'Retweet Successful',
-        message: `You retweeted post "${pin.title}"`,
-        type: 'success',
-        style: 'growl-top-right',
-        icon: 'fa-gg-circle'
-      });
     });
   }
 
@@ -65,6 +65,21 @@ class All extends Component {
           return user.emails[0].address.split('@')[0];
         }
       });
+    }
+
+    const isRetweet = (pin) => {
+      if (pin.ownerId === this.props.userId) {
+        return <i className="fa fa-retweet disabled" title="You cant repost your pin!" style={{float:"right"}}/>;
+      }
+      else if (pin.ownerId !== this.props.userId && typeof pin.retweetedBy === "undefined") {
+        return <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/>;
+      }
+      else if (pin.ownerId !== this.props.userId && (typeof pin.retweetedBy !== "undefined" && !pin.retweetedBy.includes(this.props.userId))) {
+        return <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/>;
+      }
+      else {
+        return <i className="fa fa-retweet green" title="To Unrepost this, delete from your pins" style={{float:"right"}}/>;
+      }
     }
 
     return this.props.pins.map(pin => {
@@ -81,8 +96,7 @@ class All extends Component {
             <div className="action-bar">
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
               { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
-              { pin.ownerId === this.props.userId ? <i className="fa fa-retweet disabled" title="You cant repost your pin!" style={{float:"right"}}/> :
-              pin.ownerId !== this.props.userId && (pin.retweetedBy && !pin.retweetedBy.includes(this.props.userId)) ? <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : <i className="fa fa-retweet green" title="To Unrepost this, delete from your pins" style={{float:"right"}}/> }
+              { isRetweet(pin) }
             </div>
           </div>
         </div>
