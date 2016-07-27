@@ -82,7 +82,7 @@ class All extends Component {
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
               { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
               { pin.ownerId === this.props.userId ? <i className="fa fa-retweet disabled" title="You cant repost your pin!" style={{float:"right"}}/> :
-              pin.ownerId !== this.props.userId && !pin.retweetedBy.includes(this.props.userId) ? <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : <i className="fa fa-retweet green" title="To Unrepost this, delete from your pins" style={{float:"right"}}/> }
+              pin.ownerId !== this.props.userId && (pin.retweetedBy && !pin.retweetedBy.includes(this.props.userId)) ? <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : <i className="fa fa-retweet green" title="To Unrepost this, delete from your pins" style={{float:"right"}}/> }
             </div>
           </div>
         </div>
