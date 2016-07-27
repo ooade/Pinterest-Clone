@@ -98,6 +98,16 @@ a {
   border: none;
 }
 
+.disabled {
+  color: #808080;
+  cursor: default;
+}
+
+.disabled:hover {
+  color: #888 !important;
+  cursor: default;
+}
+
 .icon-bar {
   background-color: #fff !important;
 }

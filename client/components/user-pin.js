@@ -6,7 +6,7 @@ import Moment from 'moment';
 
 class UserPin extends Component {
   imageBroken(e) {
-    e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
+    // e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
   }
 
   onLike(pin, event) {
@@ -62,8 +62,8 @@ class UserPin extends Component {
   }
 
   render() {
-    if (!this.props.pins) {
-      return <div class="alert alert-info">Oops! This user has no pin </div>
+    if (this.props.pins.length === 0) {
+      return <div className="alert alert-danger">Oops! This user has no pin </div>
     }
 
     return (

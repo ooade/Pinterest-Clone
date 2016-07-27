@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { hashHistory } from 'react-router';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Pins } from '../../imports/collections/pins';
 import Moment from 'moment';
 
 class MyPins extends Component {
   imageBroken(e) {
-    e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
+    // e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
   }
 
   onDelete(pin, event) {
@@ -28,7 +27,7 @@ class MyPins extends Component {
   }
 
   renderPins() {
-    return this.props.pins.map(pin => {
+    return this.props.myPins.map(pin => {
       let moment = Moment(pin.createdAt, 'X');
       let date = Moment(moment).fromNow();
 
@@ -51,13 +50,14 @@ class MyPins extends Component {
   }
 
   render() {
-    if (!this.props.pins) {
-      return <div className="alert alert-info">Oops! No Pins </div>
-    }
-
     if (!this.props.userId) {
       return <div className="alert alert-danger">Oops! You're not authenticated so you can't have a pin </div>
     }
+
+    if (this.props.myPins.length == 0) {
+      return <div className="alert alert-danger">Oops! You have no pin</div>;
+    }
+
     return (
       <div className="my-pins">
         <div className="grids">
@@ -68,9 +68,9 @@ class MyPins extends Component {
   }
 }
 
-export default createContainer( () => {
+export default createContainer(()=> {
   Meteor.subscribe('my-pins');
   Meteor.subscribe('userList');
 
-  return { pins: Pins.find().fetch(), userId: Meteor.userId() };
+  return { myPins: Pins.find().fetch(), userId: Meteor.userId() };
 }, MyPins);

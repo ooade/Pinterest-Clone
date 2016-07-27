@@ -6,7 +6,7 @@ import Moment from 'moment';
 
 class All extends Component {
   imageBroken(e) {
-    e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
+    // e.target.src = 'https://placeholdit.imgix.net/~text?txtsize=30&txt=p1nit&w=200&h=200';
   }
 
   onLike(pin, event) {
@@ -44,6 +44,14 @@ class All extends Component {
           icon: 'fa-gg-circle'
         });
       }
+
+      Bert.alert({
+        title: 'Retweet Successful',
+        message: `You retweeted post "${pin.title}"`,
+        type: 'success',
+        style: 'growl-top-right',
+        icon: 'fa-gg-circle'
+      });
     });
   }
 
@@ -73,7 +81,8 @@ class All extends Component {
             <div className="action-bar">
               { pin.likedBy.includes(this.props.userId) ? <i className="fa fa-heart green" onClick={this.onRemoveLike.bind(this, pin)}/>  : <i className="fa fa-heart" onClick={this.onLike.bind(this, pin)}/> }
               { pin.likedBy.length > 0 ? <sup>{pin.likedBy.length}</sup> : ""}
-              { pin.ownerId !== this.props.userId ? <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : null }
+              { pin.ownerId === this.props.userId ? <i className="fa fa-retweet disabled" title="You cant repost your pin!" style={{float:"right"}}/> :
+              pin.ownerId !== this.props.userId && !pin.retweetedBy.includes(this.props.userId) ? <i className="fa fa-retweet" title="Repost this!" onClick={this.onRetweet.bind(this, pin)} style={{float:"right"}}/> : <i className="fa fa-retweet green" title="To Unrepost this, delete from your pins" style={{float:"right"}}/> }
             </div>
           </div>
         </div>
